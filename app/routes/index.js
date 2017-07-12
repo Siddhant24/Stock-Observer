@@ -1,7 +1,7 @@
 'use strict';
 
 var path = process.cwd();
-
+var chartHandler = require('../controllers/chartHandler.js')
 module.exports = function (app, passport) {
 
 	function isLoggedIn (req, res, next) {
@@ -46,5 +46,14 @@ module.exports = function (app, passport) {
 			successRedirect: '/',
 			failureRedirect: '/login'
 		}));
+		
+	app.route('/stock')
+		.post(function(req, res){
+			chartHandler.addStock(req.body.dataset_code).then(function(message){
+				chartHandler.findAllStocks().then(function(docs){
+					console.log(docs);
+				})
+			});
+		});
 
 };
