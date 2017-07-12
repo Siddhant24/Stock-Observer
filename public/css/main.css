@@ -21,6 +21,7 @@ body {
 	font-size: 16px;
 	margin: 0;
 	padding: 0;
+	background-color:#122442;
 }
 
 header {
@@ -127,7 +128,6 @@ img {
 	font-size: 14px;
 	border-radius: 3px;
 	padding: 10px 5px;
-	width: 100px;
 	font-weight: 500;
 }
 
@@ -200,4 +200,40 @@ span {
 	color: #FFFFFF;
 	display: inline;
 	margin: 0;
+}
+
+/***Chart styling***/
+
+.container-fluid{
+	background-color: #070d16;
+	margin: 75px;
+}
+
+#separator{
+	margin: 20px;
+	background-color: grey;
+	height: 20px;
+}
+
+.stocks{
+	background-color: white;
+	border-radius: 5px;
+	height: 120px;
+/*	margin: 10px;*/
+}
+
+.remove{
+	float: right;
+}
+
+.stock-name{
+	display: inline-block;
+}
+
+.col-sm-4{
+	margin-top: 10px;
+}
+
+#add-stock{
+	min-width: 50px;
 }

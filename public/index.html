@@ -14,18 +14,39 @@
 
 	<body>
 
-
-		<div id="chart" style="height: 400px; min-width: 310px"></div>
-		<div class="row stock-container" style="border:black solid 2px;">
-			<div class="col-xs-12">
-				<form>
-					<label>Enter code</label>
-					<input type="text">
-					<input type="submit">
-				</form>
+		<div class="container-fluid">
+			<div id="chart" style="height: 400px; min-width: 310px"></div>
+			<div id="separator"></div>
+			<div class="row stock-container">
+				<div class="col-sm-4">
+					<div class="stocks">
+						<label>Enter stock code</label>
+						<form>
+							<div class="form-group">
+    							<label class="sr-only" for="stock-code">Password:</label>
+    							<div style="display:inline-block">
+    								<input type="text" class="form-control" id="stock-code">
+    							</div>
+    							<button type="submit" class="btn btn-success" id="add-stock">Add</button>
+  							</div>
+						</form>
+					</div>
+				</div>
+				<div class="col-sm-4">
+					<div class="stocks">
+						<div class="name text-center">
+							<h3 class="stock-name">GOOGL</h3>
+							<button class="btn-link remove">X</button>
+						</div>
+						<div class="stock-description"></div>
+					</div>
+				</div>
+				<div class="col-sm-4">
+					<div class="stocks">
+					</div>
+				</div>
 			</div>
 		</div>
-
 		<script type="text/javascript" src="common/ajax-functions.js"></script>
 	</body>
 
