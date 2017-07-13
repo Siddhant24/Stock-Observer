@@ -25,7 +25,7 @@ function createChart(chartData){
 function createElement(name, code){
         var div = document.createElement('div');
         div.setAttribute('class', 'col-sm-4 ' + code);
-        div.innerHTML = '<div class="stocks"><div class="name text-center"><h3 class="stock-name">' + code + '</h3><button onclick="removeStock(this)"class="btn-link remove" id=\"' + code + '\">X</button></div><div class="stock-description">' + name + '</div></div>';
+        div.innerHTML = '<div class="stocks"><div class="name text-center"><h3 class="stock-name">' + code + '</h3><button onclick="removeStock(this)"class="btn-link remove" id=\"' + code + '\">X</button></div><div class="stock-description text-center">' + name + '</div></div>';
         stockContainer.appendChild(div);
     }
     
