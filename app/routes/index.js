@@ -49,11 +49,19 @@ module.exports = function (app, passport) {
 		
 	app.route('/stock')
 		.post(function(req, res){
-			chartHandler.addStock(req.body.dataset_code).then(function(message){
-				chartHandler.findAllStocks().then(function(docs){
-					console.log(docs);
-				})
-			});
-		});
+				chartHandler.findMyStock(req.body).then(function(){
+					chartHandler.addStock(req.body.dataset_code).then(function(){
+						chartHandler.allStocks().then(function(docs){
+						//	console.log(docs);
+							res.send(chartHandler.makeChart(docs));
+						});
+					});
+				}, function(){
+					res.send(null);
+				});
+		})
+		.get(function(req, res){
+			chartHandler.deleteStock('id');
+		})
 
 };
