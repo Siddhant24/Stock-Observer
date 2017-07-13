@@ -19,7 +19,7 @@
     "boilerplate"
   ],
   "scripts": {
-  "start": "node server.js"
+    "start": "node server.js"
   },
   "author": "Siddhant Bhakar",
   "license": "MIT",
@@ -29,6 +29,7 @@
     "express-session": "^1.11.3",
     "mongoose": "^4.1.0",
     "passport": "^0.3.0",
-    "passport-github": "^1.0.0"
+    "passport-github": "^1.0.0",
+    "socket.io": "^2.0.3"
   }
 }
