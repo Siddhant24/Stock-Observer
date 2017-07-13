@@ -9,7 +9,7 @@ module.exports = {
   //      console.log(dataset_code);
         var newStock = new Stock();
         return new Promise(function(resolve, reject){
-            request(process.env.API_URL + '/WIKI/' + dataset_code + '.json?column_index=1', function (error, response, body) {
+            request(process.env.API_URL + '/WIKI/' + dataset_code + '.json?column_index=1&api_key=' + process.env.API_KEY, function (error, response, body) {
           //      console.log(body);
                 if(error) console.error(error);
                 else if(response.statusCode !== 200) console.log(response.status);
@@ -78,17 +78,18 @@ module.exports = {
         });
     },
     
-    deleteStock: function(id){
-     /* Stock.findByIdAndRemove(id, function(err, result){
-          if(err) console.error(err);
-      });*/
-      Stock.remove({}, function(err) { 
-   console.log('collection removed') 
+    deleteStock: function(dataset_code){
+        console.log("deleting..." + dataset_code);
+      Stock.findOneAndRemove({dataset_code: dataset_code}, function(err, doc){
+      if(err) console.error(err);
+      //console.log(doc.name);
+     /* Stock.remove({}, function(err) { 
+   console.log('collection removed') */
 });
     },
     
     makeChart: function(docs){
-        console.log(docs[0].data[0][0]);
+        //console.log(docs[0].data[0][0]);
         var chart = {  
             rangeSelector: {
             selected: 4
