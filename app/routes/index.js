@@ -61,7 +61,15 @@ module.exports = function (app, passport) {
 				});
 		})
 		.get(function(req, res){
-			chartHandler.deleteStock('id');
+			chartHandler.deleteStock(req.query.code);
+			res.send("deleted");
+		});
+		
+	app.route('/chart')
+		.get(function(req, res){
+			chartHandler.allStocks().then(function(docs){
+					res.send(chartHandler.makeChart(docs));
+			})
 		})
 
 };
