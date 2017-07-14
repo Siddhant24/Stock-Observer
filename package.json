@@ -1,14 +1,14 @@
 {
-  "name": "",
+  "name": "Stock Observer",
   "version": "0.0.1",
-  "description": "",
+  "description": "A web app that displays recent trends for stocks",
   "main": "server.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/johnstonbl01/clementinejs-fcc"
+    "url": "git+https://github.com/Siddhant24/Stock-Observer"
   },
   "homepage": "",
-  "bugs": "https://github.com/johnstonbl01/clementinejs-fcc/issues",
+  "bugs": "https://github.com/Siddhant24/Stock-Observer/issues",
   "keywords": [
     "MongoDB",
     "Mongoose",
