@@ -38,15 +38,12 @@ module.exports = function (app, io) {
 	io.on('connection', function (socket) {
 		console.log('user connected');
 		socket.on('new element', function (data) {
-    		console.log(data);
     		socket.broadcast.emit('add element', data);
 		});
 		socket.on('new series', function (data){
-		//	console.log(data);
 			socket.broadcast.emit('add series', data);
 		});
 		socket.on('remove stock', function(data){
-			console.log(data);
 			socket.broadcast.emit('delete', data);	
 		});
 	});

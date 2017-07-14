@@ -3,7 +3,6 @@ var stockContainer = document.querySelector(".stock-container");
 var chart;
 function removeStock(e){
         ajaxFunctions.ajaxRequest('GET', appUrl + '/stock?code=' + e.getAttribute("id"), function(data){
-            console.log(data);
             var id = e.getAttribute("id");
             var elem = document.querySelector('.' + id);
             elem.parentNode.removeChild(elem);
@@ -44,13 +43,11 @@ function createNewElement(name, code){
 }
     
 function updateChart(){
-    console.log("updating...");
         ajaxFunctions.ajaxRequest('GET', appUrl + '/chart', function(data){
             var parsedData = JSON.parse(data);
             Object.keys(parsedData.series).forEach(function(key){
                 var name = parsedData.series[key].name;
                 var code = name.split('(')[1].slice(0,-1);
-                console.log(code);
                 initialiseElements(name, code);
             });
             createChart(parsedData);
@@ -70,7 +67,6 @@ function updateChart(){
            ajaxFunctions.ajaxPostRequest({dataset_code: currValue}, appUrl + '/stock', function(data){
                 if(data != 'not found'){
                     var parsedData = JSON.parse(data);
-                    console.log(currValue);
                     var name;
                     Object.keys(parsedData.series).every(function(val){
                        if(parsedData.series[val].name.split('(')[1].slice(0,-1) === currValue){
