@@ -3,7 +3,7 @@
 var express = require('express');
 var routes = require('./app/routes/index.js');
 var mongoose = require('mongoose');
-var passport = require('passport');
+//var passport = require('passport');
 var session = require('express-session');
 var bodyParser = require('body-parser');
 var port = process.env.PORT || 8080;
@@ -11,7 +11,7 @@ var app = express();
 
 
 require('dotenv').load();
-require('./app/config/passport')(passport);
+//require('./app/config/passport')(passport);
 
 mongoose.connect(process.env.MONGO_URI);
 mongoose.Promise = global.Promise;
@@ -29,8 +29,8 @@ app.use(session({
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.use(passport.initialize());
-app.use(passport.session());
+//app.use(passport.initialize());
+//app.use(passport.session());
 
 
 var server = app.listen(port,  function () {
@@ -39,4 +39,4 @@ var server = app.listen(port,  function () {
 
 var io = require('socket.io').listen(server);
 
-routes(app, passport, io);
+routes(app, io);
