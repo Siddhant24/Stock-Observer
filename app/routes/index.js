@@ -14,7 +14,6 @@ module.exports = function (app, io) {
 				chartHandler.findMyStock(req.body).then(function(){
 					chartHandler.addStock(req.body.dataset_code).then(function(){
 						chartHandler.allStocks().then(function(docs){
-						//	console.log(docs);
 							res.send(chartHandler.makeChart(docs));
 						});
 					}, function(msg){
