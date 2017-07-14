@@ -12,7 +12,10 @@ module.exports = {
             request(process.env.API_URL + '/WIKI/' + dataset_code + '.json?column_index=1&api_key=' + process.env.API_KEY, function (error, response, body) {
           //      console.log(body);
                 if(error) console.error(error);
-                else if(response.statusCode !== 200) console.log(response.status);
+                else if(response.statusCode !== 200){
+                    console.log("respnse" + response.status);
+                    reject('not found');
+                } 
                 else{
                     var data = JSON.parse(body);
                   //  console.log(data);
