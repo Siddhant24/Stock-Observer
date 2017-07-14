@@ -66,9 +66,9 @@ function updateChart(){
     ajaxFunctions.ready(function(){
         updateChart();
         addStock.addEventListener('click', function(){
-           var currValue = stockCode.value;
+           var currValue = stockCode.value.toUppercase();
            ajaxFunctions.ajaxPostRequest({dataset_code: currValue}, appUrl + '/stock', function(data){
-                if(data){
+                if(data != 'not found'){
                     var parsedData = JSON.parse(data);
                     console.log(currValue);
                     var name;
@@ -87,6 +87,9 @@ function updateChart(){
                     div.setAttribute('class', 'col-sm-4');
                     div.innerHTML = '<div class="stocks"><div class="name text-center"><h3 class="stock-name">' + currValue + '</h3><button onclick="removeStock(this)"class="btn-link remove" id=\"' + currValue + '\">X</button></div><div class="stock-description">' + name + '</div></div>';
                     stockContainer.append(div);*/
+                }
+                else{
+                    window.alert('Incorrect or not existing stock code');
                 }
            }); 
         });
