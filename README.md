@@ -1,7 +1,7 @@
 # Stock Observer
 
 ### About
-#### A Node.js app that displays recent trends for stocks. Created using express, mongoDB and socket.io
+#### A Node.js app that displays recent trends for stocks. Created using express, mongoDB, Highcharts and socket.io
 
 ### Usage
 
