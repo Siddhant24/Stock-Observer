@@ -58,12 +58,11 @@ function updateChart(){
     
     var stockCode = document.getElementById("stock-code");
     var addStock = document.getElementById("add-stock");
-    //var remove = document.querySelector(".remove");
     
     ajaxFunctions.ready(function(){
         updateChart();
         addStock.addEventListener('click', function(){
-           var currValue = stockCode.value.toUppercase();
+           var currValue = stockCode.value.toUpperCase();
            ajaxFunctions.ajaxPostRequest({dataset_code: currValue}, appUrl + '/stock', function(data){
                 if(data != 'not found'){
                     var parsedData = JSON.parse(data);
