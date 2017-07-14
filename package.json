@@ -10,7 +10,7 @@
     "type": "git",
     "url": "git+https://github.com/Siddhant24/Stock-Observer"
   },
-  "homepage": "",
+  "homepage": "https://stockobserver.herokuapp.com/",
   "bugs": "https://github.com/Siddhant24/Stock-Observer/issues",
   "keywords": [
     "MongoDB",
