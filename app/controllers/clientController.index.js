@@ -4,11 +4,13 @@ var chart;
 function removeStock(e){
         ajaxFunctions.ajaxRequest('GET', appUrl + '/stock?code=' + e.getAttribute("id"), function(data){
             console.log(data);
-            var elem = document.querySelector('.' + e.getAttribute("id"));
+            var id = e.getAttribute("id");
+            var elem = document.querySelector('.' + id);
             elem.parentNode.removeChild(elem);
             chart.series.every(function(val, index){
                if(val.name.split('(')[1].slice(0,-1) === e.getAttribute("id")){
                    chart.series[index].remove();
+                   socket.emit('remove stock', {index: index, id: id});
                    return false;
                }
                else{
@@ -18,16 +20,28 @@ function removeStock(e){
         });
     }
     
-function createChart(chartData){
-        chart = Highcharts.stockChart('chart', chartData);
-    }
+function addSeries(data){
+    chart.addSeries(data);
+    socket.emit('new series', {series: data});
+}
     
-function createElement(name, code){
-        var div = document.createElement('div');
-        div.setAttribute('class', 'col-sm-4 ' + code);
-        div.innerHTML = '<div class="stocks"><div class="name text-center"><h3 class="stock-name">' + code + '</h3><button onclick="removeStock(this)"class="btn-link remove" id=\"' + code + '\">X</button></div><div class="stock-description text-center">' + name + '</div></div>';
-        stockContainer.appendChild(div);
-    }
+function createChart(chartData){
+    chart = Highcharts.stockChart('chart', chartData);
+}
+    
+function initialiseElements(name, code){
+    var div = document.createElement('div');
+    div.setAttribute('class', 'col-sm-4 ' + code);        div.innerHTML = '<div class="stocks"><div class="name text-center"><h3 class="stock-name">' + code + '</h3><button onclick="removeStock(this)"class="btn-link remove" id=\"' + code + '\">X</button></div><div class="stock-description text-center">' + name + '</div></div>';
+    stockContainer.appendChild(div);
+}
+    
+function createNewElement(name, code){
+    var div = document.createElement('div');
+    div.setAttribute('class', 'col-sm-4 ' + code);
+    div.innerHTML = '<div class="stocks"><div class="name text-center"><h3 class="stock-name">' + code + '</h3><button onclick="removeStock(this)"class="btn-link remove" id=\"' + code + '\">X</button></div><div class="stock-description text-center">' + name + '</div></div>';
+    socket.emit('new element', {div: div.innerHTML, code: code});   
+    stockContainer.appendChild(div);
+}
     
 function updateChart(){
     console.log("updating...");
@@ -37,7 +51,7 @@ function updateChart(){
                 var name = parsedData.series[key].name;
                 var code = name.split('(')[1].slice(0,-1);
                 console.log(code);
-                createElement(name, code);
+                initialiseElements(name, code);
             });
             createChart(parsedData);
         });
@@ -61,18 +75,18 @@ function updateChart(){
                     Object.keys(parsedData.series).every(function(val){
                        if(parsedData.series[val].name.split('(')[1].slice(0,-1) === currValue){
                            name = parsedData.series[val].name;
+                           addSeries(parsedData.series[val]);
                            return false;
                        }
                        else{
                            return true;
                        }
                     });
-                    createElement(name, currValue);
+                    createNewElement(name, currValue);
                 /*    var div = document.createElement('div');
                     div.setAttribute('class', 'col-sm-4');
                     div.innerHTML = '<div class="stocks"><div class="name text-center"><h3 class="stock-name">' + currValue + '</h3><button onclick="removeStock(this)"class="btn-link remove" id=\"' + currValue + '\">X</button></div><div class="stock-description">' + name + '</div></div>';
                     stockContainer.append(div);*/
-                    createChart(parsedData);
                 }
            }); 
         });
