@@ -237,3 +237,8 @@ span {
 #add-stock{
 	min-width: 50px;
 }
+
+footer a{
+	color: gold;
+	font-size: 20px;
+}
