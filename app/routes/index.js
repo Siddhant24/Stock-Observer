@@ -2,7 +2,7 @@
 
 var path = process.cwd();
 var chartHandler = require('../controllers/chartHandler.js')
-module.exports = function (app, passport) {
+module.exports = function (app, passport, io) {
 
 	function isLoggedIn (req, res, next) {
 		if (req.isAuthenticated()) {
@@ -69,7 +69,23 @@ module.exports = function (app, passport) {
 		.get(function(req, res){
 			chartHandler.allStocks().then(function(docs){
 					res.send(chartHandler.makeChart(docs));
-			})
-		})
+			});
+		});
+		
+	io.on('connection', function (socket) {
+		console.log('user connected');
+		socket.on('new element', function (data) {
+    		console.log(data);
+    		socket.broadcast.emit('add element', data);
+		});
+		socket.on('new series', function (data){
+		//	console.log(data);
+			socket.broadcast.emit('add series', data);
+		});
+		socket.on('remove stock', function(data){
+			console.log(data);
+			socket.broadcast.emit('delete', data);	
+		});
+	});
 
 };
