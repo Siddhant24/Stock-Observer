@@ -1,5 +1,5 @@
 {
-  "name": "Stock Observer",
+  "name": "stock-observer",
   "version": "0.0.1",
   "description": "A web app that displays recent trends for stocks",
   "main": "server.js",
