@@ -5,9 +5,11 @@ var routes = require('./app/routes/index.js');
 var mongoose = require('mongoose');
 var passport = require('passport');
 var session = require('express-session');
-var bodyParser = require('body-parser')
-
+var bodyParser = require('body-parser');
+var port = process.env.PORT || 8080;
 var app = express();
+
+
 require('dotenv').load();
 require('./app/config/passport')(passport);
 
@@ -24,15 +26,17 @@ app.use(session({
 	saveUninitialized: true
 }));
 
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 app.use(passport.initialize());
 app.use(passport.session());
 
-routes(app, passport);
 
-var port = process.env.PORT || 8080;
-app.listen(port,  function () {
+var server = app.listen(port,  function () {
 	console.log('Node.js listening on port ' + port + '...');
 });
+
+var io = require('socket.io').listen(server);
+
+routes(app, passport, io);
