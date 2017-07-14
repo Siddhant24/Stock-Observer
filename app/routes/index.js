@@ -17,6 +17,8 @@ module.exports = function (app, io) {
 						//	console.log(docs);
 							res.send(chartHandler.makeChart(docs));
 						});
+					}, function(msg){
+						res.send(msg);
 					});
 				}, function(){
 					res.send(null);
