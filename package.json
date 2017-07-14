@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "description": "A web app that displays recent trends for stocks",
   "main": "server.js",
+  "engines":{
+    "node":"4.8.1"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Siddhant24/Stock-Observer"
